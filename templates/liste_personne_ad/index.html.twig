@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des personnes!{% endblock %}
+
+{% block body %}
+{% include 'alert.html.twig' %}
+<a class="btn btn-info mb-2" href="{{ path('insert') }}" > Insertion d'une nouvelle personne</a>
+	   
+<table class="table" style="margin : auto;">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NOM</th>
+            <th scope="col">PRENOM</th>
+            <th scope="col">Date de Naissance</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telephone</th>
+            <th scope="col">Login</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Rue</th>
+            <th scope="col">Codepostal</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Livres</th>
+            <th scope="col">Produits achetés</th>
+
+
+        </tr>
+    </thead>
+    {% set taille ='80px' %}
+    {% for pers in listepersonnes %}
+    <tr>
+        <td>
+            {{ pers.id }}
+        </td>
+        <td>
+            {{ pers.nom }}
+        </td>
+        <td>
+            {{ pers.prenom }}
+        </td>
+        <td>
+            {{ pers.dateNaiss| date('d-m-Y')}}
+        </td>
+        <td>
+            {{ pers.email}}
+        </td>
+        <td>
+            {{ pers.telephone}}
+        </td>
+        <td>
+            {{ pers.login}}
+        </td>
+
+        <td>
+            {{ pers.adresse.numero}}
+        </td>
+        <td>
+            {{ pers.adresse.rue}}
+        </td>
+        <td>
+            {{ pers.adresse.codepostal}}
+        </td>
+        <td>
+            {{ pers.adresse.ville}}
+        </td>
+
+        <td>
+            <ul class="list-group list-group-flush">
+
+                <li class="list-group-item">
+                    {% if pers.livres is not empty %}
+                    {%for livre in pers.livres %}
+                <li>Titre: {{ livre.titre }}&nbsp;</li>
+                <ul>
+                    <li>Auteur: {{ livre.auteur}}&nbsp;</li>
+                    <li>Edition: {{ livre.edition }}&nbsp;</li>
+                    <li>Info: {{ livre.information}}&nbsp;</li>
+                </ul>
+                {% endfor %}
+                {% else %}
+                pas de livre
+                {% endif %}
+                </li>
+
+            </ul>
+        </td>
+        <td>
+            <ul class="list-group list-group-flush">
+
+                <li class="list-group-item">
+                    {% if pers.achatproduits is not empty %}
+                    {%for achat in pers.achatproduits %}
+                <li>Nom: {{ achat.nom }}&nbsp;</li>
+                <ul>
+                    <li>Prix: {{ achat.prix}}&nbsp;</li>
+                    <li>Nombre: {{ achat.nombre }}&nbsp;</li>
+
+                </ul>
+                {% endfor %}
+                {% else %}
+                pas d'achats
+                {% endif %}
+                </li>
+
+            </ul>
+        </td>
+        <td>
+            <a  class="btn btn-warning mt-2" href="{{ path('update', {'id': pers.id }) }}">Editer</a>
+            <a class="btn btn-danger mt-2" href="{{ path('delete', {'id': pers.id }) }}" >Supprimer</a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+</table>
+{% endblock %}

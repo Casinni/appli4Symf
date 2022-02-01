@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration du site{% endblock %}
+{% block javascripts %}
+<script>
+    $(document).ready(function() {
+        // you may need to change this code if you are not using Bootstrap Datepicker
+        $('.js-datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            <script src="{{asset('js/form.js')}}"></script>
+  {% endblock %}
+{% block body %}
+{% include 'alert.html.twig' %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        {#{{ form(my_form) }}#}
+
+        {{ form_start(my_form) }}
+        {{ form_errors(my_form) }}
+        <div class="form-group">
+            {{ form_label(my_form.nom) }}
+            {{ form_widget(my_form.nom, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.nom) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(my_form.prenom) }}
+            {{ form_widget(my_form.prenom, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.prenom) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(my_form.dateNaiss) }}
+            {{ form_widget(my_form.dateNaiss, {'attr': { 'class':'form-control js-datepicker'}}) }}
+            {{ form_errors(my_form.dateNaiss) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(my_form.email) }}
+            {{ form_widget(my_form.email, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.email) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(my_form.telephone) }}
+            {{ form_widget(my_form.telephone, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.telephone) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(my_form.login) }}
+            {{ form_widget(my_form.login, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.login) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(my_form.pwd) }}
+            {{ form_widget(my_form.pwd, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.pwd) }}
+        </div>
+       
+            <legend>{{ form_label(my_form.adresse) }}</legend>
+      
+        <div class="form-group">
+            {{ form_label(my_form.adresse.numero) }}
+            {{ form_widget(my_form.adresse.numero, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.adresse.numero) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(my_form.adresse.rue) }}
+            {{ form_widget(my_form.adresse.rue, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.adresse.rue) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(my_form.adresse.codepostal) }}
+            {{ form_widget(my_form.adresse.codepostal, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.adresse.codepostal) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(my_form.adresse.ville) }}
+            {{ form_widget(my_form.adresse.ville, {'attr': { 'class':'form-control'}}) }}
+            {{ form_errors(my_form.adresse.ville) }}  
+        </div>
+        <legend>{{ form_label(my_form.livres) }}</legend>
+        <div class="form-group">
+            {{ form_widget(my_form.livres) }}
+        </div>
+        <legend>{{ form_label(my_form.achatProduits) }}</legend>
+        <div class="form-group">
+          
+            {{ form_widget(my_form.achatProduits) }}
+
+        </div>
+
+        <div>
+        </div>
+        {{ form_row(my_form.creer, {'attr': { 'class':'btn btn-info'}}) }}
+    </div>
+    {{ form_end(my_form) }}
+    {% endblock %}
